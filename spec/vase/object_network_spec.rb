@@ -37,6 +37,14 @@ module Vase
       check_class(TestTree.new(:a, :b), StructNode)
     end
 
+    it 'should be able to retrieve nodes' do
+      a = @network.node(:a)
+      b = @network.node({b: 4})
+      a.should eq @network[:a]
+      b.should eq @network[{b: 4}]
+      @network.nodes.should eq [a, b]
+    end
+
     it 'should build array edges properly' do
       a = [1, 2]
       check_edges(a, [
