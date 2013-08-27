@@ -1,5 +1,3 @@
 require "vase/version"
-
-module Vase
-  # Your code goes here...
-end
+require "vase/network"
+require "vase/object_network"

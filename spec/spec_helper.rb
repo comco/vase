@@ -4,6 +4,22 @@
 # loaded once.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
+require 'vase'
+
+# A simple struct class for testing purposes.
+class TestStruct
+  attr_accessor :x, :y, :z
+
+  def initialize(x, y, z)
+    @x = x
+    @y = y
+    @z = z
+  end
+end
+
+# A simple binary tree class for testing purposes.
+TestTree = Struct.new(:left, :right)
+
 RSpec.configure do |config|
   config.treat_symbols_as_metadata_keys_with_true_values = true
   config.run_all_when_everything_filtered = true
