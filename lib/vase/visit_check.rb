@@ -31,6 +31,7 @@ module Vase
     end
   end
 
+  # Create a check for a node having a level among the given.
   def level(*levels)
     LevelVisitCheck.new(levels)
   end
@@ -46,6 +47,7 @@ module Vase
     end
   end
 
+  # Create a check if a node is among the given.
   def node(*nodes)
     NodeVisitCheck.new(nodes)
   end
@@ -61,6 +63,7 @@ module Vase
     end
   end
 
+  # Create a check if an edge has a marker among the given.
   def marker(*markers)
     MarkerVisitCheck.new(markers)
   end
@@ -76,6 +79,7 @@ module Vase
     end
   end
 
+  # Creates a check if an edge has a ticket among the given.
   def ticket(*tickets)
     TicketVisitCheck.new(tickets)
   end
@@ -91,6 +95,7 @@ module Vase
     end
   end
 
+  # Creates a check if the origin of a node is among the given.
   def origin(*origins)
     OriginVisitCheck.new(origins)
   end

@@ -15,6 +15,7 @@ module Vase
       @level = level
     end
 
+    # Create a new root node (without any parent)
     def self.new_root(node)
       new(node, nil, nil, 0)
     end

@@ -59,7 +59,7 @@ module Vase
       end
     end
 
-    # Return the node having a particular origin.
+    # Returns the node having a particular origin.
     def [](origin)
       @visited_nodes[origin]
     end
