@@ -12,6 +12,16 @@ module Vase
     def initialize(origin)
       @origin = origin
     end
+
+    def edge(ticket)
+      edges.find do |edge|
+        edge.ticket == ticket
+      end
+    end
+
+    def [](ticket)
+      edge(ticket).target
+    end
   end
 
   # Base class for representing edges in a network.

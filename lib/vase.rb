@@ -1,3 +1,7 @@
-require "vase/version"
-require "vase/network"
-require "vase/object_network"
+require 'vase/version'
+require 'vase/network'
+require 'vase/object_network'
+require 'vase/bag'
+require 'vase/visit_policy'
+require 'vase/visit_check'
+require 'vase/visitor'
