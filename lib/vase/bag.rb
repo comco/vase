@@ -1,9 +1,9 @@
-# Bags flavors used in graph traversal.
+# Bags flavors used in network visit.
 module Vase
 
   # Queue implementation.
   class Queue
-    def initialize(contents = [])
+    def initialize(*contents)
       @queue = contents
     end
 

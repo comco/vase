@@ -6,7 +6,7 @@ module Vase
   # Class responsible for visiting a network.
   class Visitor
     # Initialize a visitor starting from a node and having a policy.
-    def initialize(node, policy)
+    def initialize(policy, node)
       @policy = policy
       @bag = policy.new_bag(node)
       @visited_nodes = {}
@@ -19,8 +19,9 @@ module Vase
     # :stop - stop the visit.
     # These can be returned from either the #visit_node or #visit_edge policy.
     def visit_node(node_info, options = {}, &block)
+      node = node_info.node
       # add the node to the set of visited nodes
-      @visited_nodes[node_info.node.origin] = node_info.node
+      @visited_nodes[node.origin] = node_info.node
       # process the node visit
       node_action = @policy.visit_node(node_info, options, &block)
       case node_action

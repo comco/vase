@@ -13,6 +13,11 @@ module Vase
       @node_info_1 = NodeInfo.new(@node_1, @node_a, 0, 1)
     end
 
+    it 'should work for constant checks' do
+      none.call(@node_info_a).should be_false
+      any.call(@node_info_a).should be_true
+    end
+
     it 'should check for level' do
       level().call(@node_info_a).should be_false
 

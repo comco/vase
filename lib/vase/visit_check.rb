@@ -20,6 +20,27 @@ module Vase
     end
   end
 
+  # Returns a constant check
+  class ConstCheck < VisitCheck
+    def initialize(result)
+      @result = result
+    end
+
+    def call(node_info)
+      @result
+    end
+  end
+
+  # Returns a check which is false for all nodes.
+  def none
+    ConstCheck.new(false)
+  end
+
+  # Retuns a check which is true for all nodes.
+  def any
+    ConstCheck.new(true)
+  end
+
   # Checks for a level of a node during network visit.
   class LevelVisitCheck < VisitCheck
     def initialize(levels)

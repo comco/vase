@@ -72,8 +72,8 @@ module Vase
 
     # Controls the creation of a new bag for visit initialization.
     def new_bag(node)
-      node_info = NodeInfo.new(node)
-      BFS.new(node)
+      node_info = NodeInfo.new_root(node)
+      BFS.new(node_info)
     end
   end
 
@@ -89,7 +89,7 @@ module Vase
     end
 
     def visit_edge(edge, options = {}, &block)
-      if @visited_nodes.include? edge.target
+      if @visited.include? edge.target
         :step_over
       else
         super
@@ -102,6 +102,7 @@ module Vase
   class FlexibleVisitPolicy < SingleTimeVisitPolicy
     # The policy is initialized by visit checks.
     def initialize(goes_not_beyond, stops_at, goes_through)
+      super()
       @goes_not_beyond = goes_not_beyond
       @stops_at = stops_at
       @goes_through = goes_through
@@ -118,5 +119,12 @@ module Vase
     def goes_through(edge)
       @goes_through.call(edge)
     end
+  end
+
+  # Creates a default visit policy from given options.
+  def visit_policy(options)
+    FlexibleVisitPolicy.new(options[:goes_not_beyond],
+                            options[:stops_at],
+                            options[:goes_through])
   end
 end

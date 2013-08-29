@@ -18,7 +18,14 @@ class TestStruct
 end
 
 # A simple binary tree class for testing purposes.
-TestTree = Struct.new(:left, :right)
+class TestTree
+  attr_accessor :left, :right
+
+  def initialize(left, right)
+    @left = left
+    @right = right
+  end
+end
 
 RSpec.configure do |config|
   config.treat_symbols_as_metadata_keys_with_true_values = true
