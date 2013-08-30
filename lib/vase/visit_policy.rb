@@ -22,7 +22,7 @@ module Vase
 
     # Create a new node info for the child node, determined by a ticket.
     def new_node_info(ticket)
-      NodeInfo.new(node[ticket], node, ticket, 1 + level)
+      NodeInfo.new(node.node(ticket), node, ticket, 1 + level)
     end
   end
 

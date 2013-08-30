@@ -5,6 +5,7 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 require 'vase'
+require 'graphviz'
 
 # A simple struct class for testing purposes.
 class TestStruct

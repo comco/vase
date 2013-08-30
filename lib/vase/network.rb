@@ -19,8 +19,14 @@ module Vase
       end
     end
 
-    def [](ticket)
+    def node(ticket)
       edge(ticket).target
+    end
+
+    def nodes()
+      edges.map do |edge|
+        edge.target
+      end
     end
   end
 

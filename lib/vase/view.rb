@@ -1,11 +1,9 @@
 # Views functionality.
 module Vase
-  # A base view class, representing a view of nodes in a visual graph.
-  # A concrete implementation should support the method for_nodes, which 
-  class ViewPolicy
-  end
-
+  # Base class for views.
   class View
+    attr_reader :name
+
     def initialize(name)
       @name = name
       @visuals = {}
@@ -18,27 +16,43 @@ module Vase
 
     # Returns a node label.
     def node_label(node)
-      node.to_s
+      node.origin.to_s
     end
 
-    def add_visual(node, visual)
-      @visuals[node] = visual
+    def visual(node)
+      @visuals[node]
     end
   end
 
-  class GraphvizView < View
-    def initialize(nodes, graph, policy)
-      @nodes = nodes
+  class GraphVizView < View
+    attr_reader :graph, :nodes
+
+    def initialize(name, graph, nodes)
+      super(name)
       @graph = graph
-      @policy = policy
-      @visuals = {}
+      @nodes = nodes
     end
 
-    # Draws the view to the graph.
-    def draw
+    def draw()
       @nodes.each do |node|
-        visual = @graph.add_nodes(node_id(node), label: node_label(node))
-        add_visual(node, visual)
+        @visuals[node] = @graph.add_nodes(node_id(node), 
+                                          label: node_label(node))
+      end
+    end
+  end
+
+  # Connects the network nodes from the source view to the target view.
+  def connect(source_view, target_view)
+    graph = source_view.graph
+    source_view.nodes.each do |source_node|
+      source_visual = source_view.visual(source_node)
+      source_node.edges.each do |edge|
+        target_visual = target_view.visual(edge.target)
+        unless target_visual.nil?
+          graph.add_edge(source_visual, 
+                         target_visual,
+                         label: edge.ticket.to_s)
+        end
       end
     end
   end
