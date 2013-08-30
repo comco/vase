@@ -52,6 +52,11 @@ module Vase
       marker(:hash_edge).call(@node_a.edge(1)).should be_false
     end
 
+    it 'should check for target' do
+      target(@node_a.node(0)).call(@node_a.edge(0)).should be_true
+      target(@node_a.node(0)).call(@node_a.edge(1)).should be_false
+    end
+
     it 'should work with not' do
       node(@node_1).not.call(@node_info_1).should be_false
       node(@node_1).not.call(@node_info_a).should be_true

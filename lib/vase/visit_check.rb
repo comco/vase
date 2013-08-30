@@ -105,6 +105,23 @@ module Vase
     TicketVisitCheck.new(tickets)
   end
 
+  # Checks for a particular target of an edge.
+  class TargetVisitCheck < VisitCheck
+    def initialize(targets)
+      @targets = targets
+    end
+
+    def call(edge)
+      @targets.include?(edge.target)
+    end
+  end
+
+  # Creates a check if an edge points to a target amoung
+  # the given.
+  def target(*targets)
+    TargetVisitCheck.new(targets)
+  end
+
   # Checks for a particular node origin.
   class OriginVisitCheck < VisitCheck
     def initialize(origins)
