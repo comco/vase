@@ -41,6 +41,39 @@ module Vase
     end
   end
 
+  class ArrayGraphVizView < View
+    attr_reader :graph, :edges
+
+    def initialize(name, graph, edges)
+      super(name)
+      @graph = graph
+      @edges = edges
+    end
+
+    def nodes
+      edge.map(&:target)
+    end
+
+    def draw()
+      array_visual = @graph.add_nodes(node_name(), shape: 'record')
+      edges.each do |edge|
+        @visuals[edge.target] = {array_visual => edge_id(edge) }
+      end
+    end
+
+    def node_name()
+      node_names = edges.map do |edge|
+        node = edge.target
+        "<#{edge_id(edge)}>#{node_label(node)}"
+      end
+      node_names.join('|')
+    end
+
+    def edge_id(edge)
+      edge.ticket.to_s
+    end
+  end
+
   # Connects the network nodes from the source view to the target view.
   def connect(source_view, target_view)
     graph = source_view.graph
