@@ -9,14 +9,18 @@ module Vase
       @sections = {}
     end
 
+    def new_section(name)
+      Section.new(name, self)
+    end
+
     def get_section(name)
       unless @sections.has_key?(name)
-        @sections[name] = Section.new(name, self)
+        @sections[name] = new_section(name)
       end
       @sections[name]
     end
 
-    def section(name)
+    def section(name, options = {})
       s = get_section(name)
       s.before()
       yield
